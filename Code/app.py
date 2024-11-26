@@ -7,18 +7,15 @@ app = Flask(__name__)
 # Route für die Hauptseite (Frontend)
 @app.route('/')
 def index():
-    return render_template('index.html')  # Stelle sicher, dass index.html existiert
+    return render_template('index.html')
 
 # Route für die API-Verarbeitung
 @app.route('/api/process', methods=['POST'])
 def process():
-    # Überprüfen, ob eine Datei hochgeladen wurde
     if 'audio_file' not in request.files:
         return jsonify({"error": "Keine Datei hochgeladen"}), 400
     
     audio_file = request.files['audio_file']
-    
-    # Speichern der Datei im temporären Ordner
     file_path = f"./uploads/{audio_file.filename}"
     audio_file.save(file_path)
     
@@ -26,10 +23,9 @@ def process():
         # Transkription der Audiodatei
         transcription = transcribe_audio(file_path)
         
-        # Zusammenfassung des Transkripts
+        # Zusammenfassung mit Ollama (Llama 3.2)
         summary = summarize_text(transcription)
         
-        # Rückgabe der Ergebnisse an das Frontend
         return jsonify({
             "transcription": transcription,
             "summary": summary

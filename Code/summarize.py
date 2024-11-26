@@ -1,15 +1,12 @@
-import openai
-
-openai.api_key = 'DEIN_OPENAI_API_KEY'
+import ollama
 
 def summarize_text(text):
-    prompt = f"Fasse die wichtigsten Punkte aus dem folgenden Meeting-Protokoll zusammen:\n\n{text}"
-    response = openai.Completion.create(
-        model="gpt-4",  # Oder gpt-3.5-turbo, falls GPT-4 nicht verfügbar ist
-        prompt=prompt,
-        max_tokens=300
-    )
-    return response.choices[0].text.strip()
+    # Anfrage an die Ollama API mit dem geladenen Modell
+    response = ollama.chat(model='llama3', messages=[
+        {'role': 'system', 'content': 'Fasse die wichtigsten Punkte aus dem folgenden Meeting-Protokoll zusammen und liste alle To-Dos auf.'},
+        {'role': 'user', 'content': text}
+    ])
+    return response['message']['content']
 
 if __name__ == "__main__":
     sample_text = "Hier kommt das Transkript hin."
