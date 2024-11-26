@@ -14,7 +14,7 @@ def transcribe_audio(file_path):
         return None
 
 # Teste mit einer Beispiel-Audiodatei
-transcription = transcribe_audio("C:/Users/Philipp/KI_tool/Programmentwurf-Anwendungen_von_Sprachmodellen/mp3_datei\DEUTSCHE_WIRTSCHAFT_Strompreis-Forderung_Industriekonferenz_mit_Habeck_sucht_Wege_aus_der_Krise_[_YouConvert.net_].mp3")
+transcription = transcribe_audio("C:/Users/Philipp/KI_tool/Programmentwurf-Anwendungen_von_Sprachmodellen/mp3_datei\DEUTSCHE_WIRTSCHAFT_Strompreis-Forderung_Industriekonferenz_mit_Habeck_sucht_Wege_aus_der_Krise_[_YouConvert.net_].wav")
 if transcription:
     print("Transkription erfolgreich:", transcription)
 else:
