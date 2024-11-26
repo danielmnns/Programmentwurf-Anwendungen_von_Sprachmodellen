@@ -3,3 +3,4 @@ whisper
 streamlit
 pandas
 plotly
+flask
