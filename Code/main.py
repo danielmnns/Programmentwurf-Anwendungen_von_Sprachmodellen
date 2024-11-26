@@ -1,13 +1,19 @@
 from flask import Flask, render_template, request, jsonify
 from transcribe import transcribe_audio
 from summarize import summarize_text
+import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+
+# Verzeichnis zum Speichern der Audiodateien
+UPLOAD_FOLDER = './uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Route für die Hauptseite (Frontend)
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html')  # Dein Frontend HTML
 
 # Route für die API-Verarbeitung
 @app.route('/api/process', methods=['POST'])
@@ -16,7 +22,12 @@ def process():
         return jsonify({"error": "Keine Datei hochgeladen"}), 400
     
     audio_file = request.files['audio_file']
-    file_path = f"./uploads/{audio_file.filename}"
+    
+    # Sicherstellen, dass der Dateiname sicher ist
+    filename = secure_filename(audio_file.filename)
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    
+    # Speichern der Audioaufnahme
     audio_file.save(file_path)
     
     try:
