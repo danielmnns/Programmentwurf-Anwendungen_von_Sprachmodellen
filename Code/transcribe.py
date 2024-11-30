@@ -23,16 +23,26 @@ if os.path.exists(local_fp):
     if os.access(local_fp, os.R_OK):
         print("Die Datei ist lesbar.")
         
+        # Testen, ob die Datei direkt geöffnet werden kann
+        try:
+            with open(local_fp, 'rb') as f:
+                print("Die Datei wurde erfolgreich geöffnet.")
+        except Exception as e:
+            print(f"Fehler beim Öffnen der Datei: {e}")
+        
         # Laden des Whisper-Modells
         model = whisper.load_model("base", device=device)
         
-        # Transkription der Audiodatei
+        # Sprach-zu-Text-Transkription der Audiodatei
         try:
-            result = model.transcribe(local_fp)
+            print(f"Starte Sprach-zu-Text-Transkription der Datei: {local_fp}")
+            # Konvertieren des Pfads in ein für whisper verständliches Format
+            local_fp_for_whisper = local_fp.replace("\\", "/")
+            result = model.transcribe(local_fp_for_whisper)
             # Ausgabe der Transkription
             print(result["text"])
         except Exception as e:
-            print(f"Fehler bei der Transkription: {e}")
+            print(f"Fehler bei der Sprach-zu-Text-Transkription: {e}")
     else:
         print("Die Datei ist nicht lesbar. Überprüfen Sie die Berechtigungen.")
 else:
