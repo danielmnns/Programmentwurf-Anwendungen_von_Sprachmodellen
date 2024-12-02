@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audio Transcription and Summary</title>
+    <style>
+        #loading {
+            display: none;
+            width: 100%;
+            background-color: #f3f3f3;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+        #loading-bar {
+            width: 0;
+            height: 30px;
+            background-color: #4caf50;
+        }
+    </style>
 </head>
 <body>
     <h1>Audio Transcription and Summary</h1>
@@ -25,6 +40,11 @@
     <br>
     <h2>Transcription and Summary:</h2>
     <div id="result"></div>
+
+    <div id="loading">
+        <div id="loading-bar"></div>
+        Loading...
+    </div>
 
     <script>
         let mediaRecorder;
@@ -62,27 +82,39 @@
             document.getElementById('stop-button').disabled = true;
         });
 
-        document.getElementById('upload-form').addEventListener('submit', async (event) => {
+        async function handleFormSubmit(event) {
             event.preventDefault();
             const formData = new FormData(event.target);
+            showLoading();
             const response = await fetch('/upload', {
                 method: 'POST',
                 body: formData
             });
             const result = await response.json();
+            hideLoading();
             document.getElementById('result').innerText = JSON.stringify(result, null, 2);
-        });
+        }
 
-        document.getElementById('record-form').addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const response = await fetch('/upload', {
-                method: 'POST',
-                body: formData
-            });
-            const result = await response.json();
-            document.getElementById('result').innerText = JSON.stringify(result, null, 2);
-        });
+        document.getElementById('upload-form').addEventListener('submit', handleFormSubmit);
+        document.getElementById('record-form').addEventListener('submit', handleFormSubmit);
+
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                } else {
+                    width++;
+                    document.getElementById('loading-bar').style.width = width + '%';
+                }
+            }, 100);
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('loading-bar').style.width = '0';
+        }
     </script>
 </body>
 </html>

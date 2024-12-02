@@ -3,7 +3,7 @@ import requests
 def summarize_text(text):
     url = "http://127.0.0.1:11434/chat"  # URL der lokalen Ollama-Instanz
     payload = {
-        'model': 'llama3',
+        'model': 'llama3',  # Modellname, den Sie verwenden möchten
         'messages': [
             {'role': 'system', 'content': 'Fasse die wichtigsten Punkte aus dem folgenden Meeting-Protokoll zusammen und liste alle To-Dos auf.'},
             {'role': 'user', 'content': text}
