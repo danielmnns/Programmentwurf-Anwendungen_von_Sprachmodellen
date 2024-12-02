@@ -7,7 +7,8 @@ from summarize import summarize_text
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024  # 32 MB
+
 
 @app.route('/')
 def index():
