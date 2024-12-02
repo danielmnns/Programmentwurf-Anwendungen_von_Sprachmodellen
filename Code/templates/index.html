@@ -1,120 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Transcription and Summary</title>
-    <style>
-        #loading {
-            display: none;
-            width: 100%;
-            background-color: #f3f3f3;
-            text-align: center;
-            line-height: 30px;
-            color: white;
-        }
-        #loading-bar {
-            width: 0;
-            height: 30px;
-            background-color: #4caf50;
-        }
-    </style>
+  <title>Audio Transcription and Summary</title>
+    <link rel="stylesheet" href="/Code/static/styles.css">
 </head>
+
 <body>
-    <h1>Audio Transcription and Summary</h1>
-    <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
-        <label for="audio-file">Upload an audio file (.mp3 or .wav):</label>
-        <input type="file" id="audio-file" name="audio-file" accept=".mp3, .wav">
-        <button type="submit">Upload</button>
-    </form>
-    <br>
-    <h2>Or record your audio:</h2>
-    <button id="record-button">Record</button>
-    <button id="stop-button" disabled>Stop</button>
-    <audio id="audio-playback" controls></audio>
-    <br>
-    <form id="record-form" action="/upload" method="post" enctype="multipart/form-data">
-        <input type="hidden" id="recorded-audio" name="recorded-audio">
-        <button type="submit" id="submit-recording" disabled>Submit Recording</button>
-    </form>
-    <br>
-    <h2>Transcription and Summary:</h2>
-    <div id="result"></div>
+    <div class="container">
+        <h1>Audio Transcription and Summary</h1>
+        <section class="upload-section">
+            <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+                <label for="audio-file">Upload an audio file (.mp3 or .wav):</label>
+                <input type="file" id="audio-file" name="audio-file" accept=".mp3, .wav">
+                <button type="submit">Upload</button>
+            </form>
+        </section>
 
-    <div id="loading">
-        <div id="loading-bar"></div>
-        Loading...
+        <section class="record-section">
+            <h2>Or record your audio:</h2>
+            <div class="record-buttons">
+                <button id="record-button">Record</button>
+                <button id="stop-button" disabled>Stop</button>
+            </div>
+            <audio id="audio-playback" controls></audio>
+            <form id="record-form" action="/upload" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="recorded-audio" name="recorded-audio">
+                <button type="submit" id="submit-recording" disabled>Submit Recording</button>
+            </form>
+        </section>
+
+    
+        <h1>Transcription and Summary</h1>
+        <section class="result-section">
+            <div class="transcription-section">
+                <h2>Transcription:</h2>
+                <div id="transcription" class="result-box">
+                </div>
+            </div>
+        
+            <div class="summary-section">
+                <h2>Summary:</h2>
+                <div id="summary" class="result-box">
+                </div>
+            </div>
+        </section>
     </div>
-
-    <script>
-        let mediaRecorder;
-        let audioChunks = [];
-
-        document.getElementById('record-button').addEventListener('click', async () => {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            mediaRecorder = new MediaRecorder(stream);
-            mediaRecorder.start();
-
-            mediaRecorder.addEventListener('dataavailable', event => {
-                audioChunks.push(event.data);
-            });
-
-            mediaRecorder.addEventListener('stop', () => {
-                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                const audioUrl = URL.createObjectURL(audioBlob);
-                document.getElementById('audio-playback').src = audioUrl;
-
-                const reader = new FileReader();
-                reader.readAsDataURL(audioBlob);
-                reader.onloadend = () => {
-                    document.getElementById('recorded-audio').value = reader.result;
-                    document.getElementById('submit-recording').disabled = false;
-                };
-            });
-
-            document.getElementById('record-button').disabled = true;
-            document.getElementById('stop-button').disabled = false;
-        });
-
-        document.getElementById('stop-button').addEventListener('click', () => {
-            mediaRecorder.stop();
-            document.getElementById('record-button').disabled = false;
-            document.getElementById('stop-button').disabled = true;
-        });
-
-        async function handleFormSubmit(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            showLoading();
-            const response = await fetch('/upload', {
-                method: 'POST',
-                body: formData
-            });
-            const result = await response.json();
-            hideLoading();
-            document.getElementById('result').innerText = JSON.stringify(result, null, 2);
-        }
-
-        document.getElementById('upload-form').addEventListener('submit', handleFormSubmit);
-        document.getElementById('record-form').addEventListener('submit', handleFormSubmit);
-
-        function showLoading() {
-            document.getElementById('loading').style.display = 'block';
-            let width = 0;
-            const interval = setInterval(() => {
-                if (width >= 100) {
-                    clearInterval(interval);
-                } else {
-                    width++;
-                    document.getElementById('loading-bar').style.width = width + '%';
-                }
-            }, 100);
-        }
-
-        function hideLoading() {
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('loading-bar').style.width = '0';
-        }
-    </script>
 </body>
+
 </html>
