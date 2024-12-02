@@ -1,90 +1,88 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KI-Meeting-Protokoll-Tool</title>
-    <style>
-        button {
-            font-size: 18px;
-            padding: 10px;
-        }
-    </style>
+    <title>Audio Transcription and Summary</title>
 </head>
 <body>
-    <h1>Meeting-Protokoll-Tool</h1>
-    
-    <!-- Audioaufnahme -->
-    <h2>Aufnahme starten</h2>
-    <button id="startRecording">Start Aufnahme</button>
-    <button id="stopRecording" disabled>Stop Aufnahme</button>
-    
-    <h3>Transkript:</h3>
-    <div id="transcript"></div>
-    <h3>Zusammenfassung:</h3>
-    <div id="summary"></div>
+    <h1>Audio Transcription and Summary</h1>
+    <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+        <label for="audio-file">Upload an audio file (.mp3 or .wav):</label>
+        <input type="file" id="audio-file" name="audio-file" accept=".mp3, .wav">
+        <button type="submit">Upload</button>
+    </form>
+    <br>
+    <h2>Or record your audio:</h2>
+    <button id="record-button">Record</button>
+    <button id="stop-button" disabled>Stop</button>
+    <audio id="audio-playback" controls></audio>
+    <br>
+    <form id="record-form" action="/upload" method="post" enctype="multipart/form-data">
+        <input type="hidden" id="recorded-audio" name="recorded-audio">
+        <button type="submit" id="submit-recording" disabled>Submit Recording</button>
+    </form>
+    <br>
+    <h2>Transcription and Summary:</h2>
+    <div id="result"></div>
 
     <script>
         let mediaRecorder;
         let audioChunks = [];
-        
-        // Zugriff auf das Mikrofon
-        let startButton = document.getElementById('startRecording');
-        let stopButton = document.getElementById('stopRecording');
 
-        startButton.addEventListener('click', () => {
-            startRecording();
-        });
-
-        stopButton.addEventListener('click', () => {
-            stopRecording();
-        });
-
-        async function startRecording() {
-            let stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        document.getElementById('record-button').addEventListener('click', async () => {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             mediaRecorder = new MediaRecorder(stream);
-
-            mediaRecorder.ondataavailable = event => {
-                audioChunks.push(event.data);
-            };
-
-            mediaRecorder.onstop = () => {
-                let audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                let audioUrl = URL.createObjectURL(audioBlob);
-                let audio = new Audio(audioUrl);
-                audioChunks = []; // Zurücksetzen der Audiodaten
-                sendAudioToServer(audioBlob); // Audio an den Server senden
-            };
-
             mediaRecorder.start();
-            startButton.disabled = true;
-            stopButton.disabled = false;
-        }
 
-        function stopRecording() {
+            mediaRecorder.addEventListener('dataavailable', event => {
+                audioChunks.push(event.data);
+            });
+
+            mediaRecorder.addEventListener('stop', () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                const audioUrl = URL.createObjectURL(audioBlob);
+                document.getElementById('audio-playback').src = audioUrl;
+
+                const reader = new FileReader();
+                reader.readAsDataURL(audioBlob);
+                reader.onloadend = () => {
+                    document.getElementById('recorded-audio').value = reader.result;
+                    document.getElementById('submit-recording').disabled = false;
+                };
+            });
+
+            document.getElementById('record-button').disabled = true;
+            document.getElementById('stop-button').disabled = false;
+        });
+
+        document.getElementById('stop-button').addEventListener('click', () => {
             mediaRecorder.stop();
-            startButton.disabled = false;
-            stopButton.disabled = true;
-        }
+            document.getElementById('record-button').disabled = false;
+            document.getElementById('stop-button').disabled = true;
+        });
 
-        function sendAudioToServer(audioBlob) {
-            const formData = new FormData();
-            formData.append('audio_file', audioBlob, 'recording.wav');
-            
-            fetch('/api/process', {
+        document.getElementById('upload-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const response = await fetch('/upload', {
                 method: 'POST',
                 body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Transkript und Zusammenfassung auf der Seite anzeigen
-                document.getElementById('transcript').innerText = data.transcription;
-                document.getElementById('summary').innerText = data.summary;
-            })
-            .catch(error => {
-                console.error('Fehler:', error);
             });
-        }
+            const result = await response.json();
+            document.getElementById('result').innerText = JSON.stringify(result, null, 2);
+        });
+
+        document.getElementById('record-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            document.getElementById('result').innerText = JSON.stringify(result, null, 2);
+        });
     </script>
 </body>
 </html>
