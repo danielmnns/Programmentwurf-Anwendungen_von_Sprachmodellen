@@ -17,4 +17,4 @@ OllamaSetup installieren: https://ollama.com/
 3. Bibliotheken installieren (in Entwicklungsumgebung): ```pip install -r code/requirements.txt``` 
 
 ### Ausführen
-```python app.py```
+```python main.py```
