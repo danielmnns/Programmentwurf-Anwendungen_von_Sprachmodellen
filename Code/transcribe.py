@@ -2,13 +2,9 @@ import os
 import warnings
 import whisper
 
-# Unterdrücken von FutureWarnings und UserWarnings
-warnings.filterwarnings("ignore", category=FutureWarning)
-warnings.filterwarnings("ignore", category=UserWarning)
 
-# Dynamischer Pfad zur Audiodatei basierend auf dem aktuellen Arbeitsverzeichnis
-current_dir = os.getcwd()
-local_fp = os.path.join(current_dir, 'mp3_datei', 'test_audio.wav')
+# Relativer Pfad zur Audiodatei
+local_fp = os.path.join(os.getcwd(), 'mp3_datei', 'test_audio2.mp3')
 
 device = 'cpu'  # oder 'cuda', wenn GPU verwendet wird
 
@@ -36,9 +32,7 @@ if os.path.exists(local_fp):
         # Sprach-zu-Text-Transkription der Audiodatei
         try:
             print(f"Starte Sprach-zu-Text-Transkription der Datei: {local_fp}")
-            # Konvertieren des Pfads in ein für whisper verständliches Format
-            local_fp_for_whisper = local_fp.replace("\\", "/")
-            result = model.transcribe(local_fp_for_whisper)
+            result = model.transcribe(local_fp)
             # Ausgabe der Transkription
             print(result["text"])
         except Exception as e:
