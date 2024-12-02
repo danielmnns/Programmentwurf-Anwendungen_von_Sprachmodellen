@@ -37,16 +37,34 @@
         <section class="result-section">
             <div class="transcription-section">
                 <h2>Transcription:</h2>
-                <div id="transcription" class="result-box">
-                </div>
-            </div>
-        
-            <div class="summary-section">
-                <h2>Summary:</h2>
-                <div id="summary" class="result-box">
-                </div>
+                <div id="transcription" class="result-box"></div>
             </div>
         </section>
+
+        <script>
+            document.getElementById('upload-form').addEventListener('submit', handleFormSubmit);
+            document.getElementById('record-form').addEventListener('submit', handleFormSubmit);
+
+            function showLoading() {
+                document.getElementById('loading').style.display = 'block';
+                let width = 0;
+                const interval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(interval);
+                    } else {
+                        width++;
+                        document.getElementById('loading-bar').style.width = width + '%';
+                    }
+                }, 100);
+            }
+
+            function hideLoading() {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('loading-bar').style.width = '0';
+            }
+        </script>
+
+
     </div>
 </body>
 
