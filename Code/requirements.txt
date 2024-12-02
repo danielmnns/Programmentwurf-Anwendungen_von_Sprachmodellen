@@ -7,4 +7,6 @@ flask
 ollama
 openai-whisper
 ffmpeg-python
+requests
+
 
