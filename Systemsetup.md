@@ -28,7 +28,7 @@ Folgen Sie diesen Schritten, um die erforderlichen Pakete zu installieren:
 
 3. Installieren Sie die erforderlichen Pakete aus der `requirements.txt`:
     ```bash
-    pip install -r requirements.txt
+    pip install -r code/requirements.txt
     ```
 
 ## PyTorch aktualisieren
