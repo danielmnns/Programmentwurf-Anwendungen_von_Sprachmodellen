@@ -1,40 +1,39 @@
-from flask import Flask, render_template, request, jsonify
-from transcribe import transcribe_audio
-from summarize import summarize_text
+from flask import Flask, request, jsonify, render_template
 import os
 from werkzeug.utils import secure_filename
+import base64
+from transcribe import transcribe_audio
+from summarize import summarize_text
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'uploads'
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# Verzeichnis zum Speichern der Audiodateien
-UPLOAD_FOLDER = './uploads'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-# Route für die Hauptseite (Frontend)
 @app.route('/')
 def index():
-    return render_template('index.html')  # Dein Frontend HTML
+    return render_template('index.html')
 
-# Route für die API-Verarbeitung
-@app.route('/api/process', methods=['POST'])
-def process():
-    if 'audio_file' not in request.files:
-        return jsonify({"error": "Keine Datei hochgeladen"}), 400
-    
-    audio_file = request.files['audio_file']
-    
-    # Sicherstellen, dass der Dateiname sicher ist
-    filename = secure_filename(audio_file.filename)
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    
-    # Speichern der Audioaufnahme
-    audio_file.save(file_path)
-    
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    if 'audio-file' in request.files:
+        audio_file = request.files['audio-file']
+        filename = secure_filename(audio_file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        audio_file.save(file_path)
+    elif 'recorded-audio' in request.form:
+        audio_data = request.form['recorded-audio'].split(",")[1]
+        filename = "recorded_audio.wav"
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        with open(file_path, "wb") as f:
+            f.write(base64.b64decode(audio_data))
+    else:
+        return jsonify({"error": "No audio file provided"}), 400
+
     try:
         # Transkription der Audiodatei
         transcription = transcribe_audio(file_path)
         
-        # Zusammenfassung mit Ollama (Llama 3.2)
+        # Zusammenfassung
         summary = summarize_text(transcription)
         
         return jsonify({
