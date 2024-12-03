@@ -6,22 +6,27 @@
   
   <title>Audio Transcription and Summary</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-  <!-- Zur Entwicklung <link rel="stylesheet" href="/code/static/styles.css"> -->
+  <!-- Zur Entwicklung --> <link rel="stylesheet" href="/code/static/styles.css">
   
 </head>
 <body>
     <div class="container">
         <h1>Audio Transcription and Summary</h1>
-        <section class="upload-section">
+        <div class="tab-menu">
+            <button class="tab-button active" data-target="upload-section">Upload</button>
+            <button class="tab-button" data-target="record-section">Record</button>
+        </div>
+        
+        <div id="upload-section" class="tab-content active">
             <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
-                <label for="audio-file">Upload an audio file (.mp3 or .wav):</label>
+                <h2>Upload an audio file (.mp3 or .wav):</h2>
                 <input type="file" id="audio-file" name="audio-file" accept=".mp3, .wav">
                 <button type="submit">Upload</button>
             </form>
-        </section>
-
-        <section class="record-section">
-            <h2>Or record your audio:</h2>
+        </div>
+        
+        <div id="record-section" class="tab-content">
+            <h2>Record your audio:</h2>
             <div class="record-buttons">
                 <button id="record-button">Record</button>
                 <button id="stop-button" disabled>Stop</button>
@@ -31,7 +36,7 @@
                 <input type="hidden" id="recorded-audio" name="recorded-audio">
                 <button type="submit" id="submit-recording" disabled>Submit Recording</button>
             </form>
-        </section>
+        </div>
 
         <h1>Transcription and Summary</h1>
         <section class="result-section">
@@ -51,6 +56,23 @@
         </div>
 
         <script>
+            const tabs = document.querySelectorAll('.tab-button');
+                const contents = document.querySelectorAll('.tab-content');
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        // Alle Tabs inaktiv setzen
+                        tabs.forEach(t => t.classList.remove('active'));
+                        // Den aktuellen Tab aktivieren
+                        tab.classList.add('active');
+
+                        // Alle Inhalte ausblenden
+                        contents.forEach(content => content.classList.remove('active'));
+                        // Den zugehörigen Inhalt anzeigen
+                        document.getElementById(tab.getAttribute('data-target')).classList.add('active');
+                    });
+                });
+
             let mediaRecorder;
             let audioChunks = [];
 
