@@ -74,3 +74,71 @@ Wenn ffmpeg korrekt eingerichtet ist, sehen Sie die Versionsinformationen.
 
 ## Projekt ausführen
 Nachdem torch aktualisiert und ffmpeg installiert sind, können Sie die Anwendung ausführen
+
+# Error Handling Guide
+
+Dieses Dokument beschreibt die häufigsten Fehler, die bei der Installation und Ausführung des Projekts auftreten können, und wie man sie behebt.
+
+## Inhaltsverzeichnis
+1. [Installation](#installation)
+2. [Häufige Fehler](#häufige-fehler)
+    - [Fehler 413: Payload Too Large](#fehler-413-payload-too-large)
+    - [Fehler bei der Installation von `openai-whisper`](#fehler-bei-der-installation-von-openai-whisper)
+    - [Fehler: `ffmpeg` nicht gefunden](#fehler-ffmpeg-nicht-gefunden)
+3. [Kontakt](#kontakt)
+
+## Installation
+
+Stellen Sie sicher, dass Sie alle Schritte in der [Systemsetup.md](Systemsetup.md) korrekt befolgt haben, bevor Sie mit dem Error-Handling fortfahren.
+
+## Häufige Fehler
+
+### Fehler 413: Payload Too Large
+
+**Beschreibung**: Dieser Fehler tritt auf, wenn die hochgeladene Datei zu groß ist und der Server sie nicht verarbeiten kann.
+
+**Lösung**:
+1. Öffnen Sie Ihre Flask-Anwendung (`main.py`).
+2. Fügen Sie die folgende Konfiguration hinzu, um die maximale Dateigröße zu erhöhen:
+    ```python
+    app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
+    ```
+3. Starten Sie den Server neu.
+
+### Fehler bei der Installation von `openai-whisper`
+
+**Beschreibung**: Dieser Fehler tritt auf, wenn das Paket `openai-whisper` nicht erfolgreich installiert werden kann.
+
+**Lösung**:
+1. Aktualisieren Sie `pip`:
+    ```bash
+    python -m pip install --upgrade pip
+    ```
+2. Installieren Sie `openai-whisper` separat:
+    ```bash
+    pip install openai-whisper
+    ```
+3. Wenn das Problem weiterhin besteht, versuchen Sie, das Paket direkt von GitHub zu installieren:
+    ```bash
+    pip install git+https://github.com/openai/whisper.git
+    ```
+
+### Fehler: `ffmpeg` nicht gefunden
+
+**Beschreibung**: Dieser Fehler tritt auf, wenn `ffmpeg` nicht korrekt installiert oder nicht im PATH verfügbar ist.
+
+**Lösung**:
+1. Stellen Sie sicher, dass `ffmpeg` installiert ist. Befolgen Sie die Anweisungen in der [Systemsetup.md](Systemsetup.md).
+2. Überprüfen Sie, ob `ffmpeg` im PATH verfügbar ist:
+    ```bash
+    ffmpeg -version
+    ```
+3. Wenn `ffmpeg` nicht gefunden wird, fügen Sie den Installationspfad von `ffmpeg` zu Ihrem PATH hinzu.
+
+## Kontakt
+
+Wenn Sie weiterhin Probleme haben, wenden Sie sich bitte an den Projektbetreuer oder erstellen Sie ein Issue im GitHub-Repository.
+
+---
+
+Dieses Dokument wird regelmäßig aktualisiert, um neue Fehler und Lösungen aufzunehmen. Stellen Sie sicher, dass Sie die neueste Version verwenden.
