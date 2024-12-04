@@ -97,10 +97,12 @@ audio {
     font-size: 16px;
     border: 1px solid #ced4da;
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: #cce5ff; /* Hellblau als Hintergrundfarbe */
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
+    color: white; /* Optional: Lesbare Schriftfarbe */
 }
+
 
 .tab-button.active {
     background-color: #007bff;
