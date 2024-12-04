@@ -1,6 +1,28 @@
 let mediaRecorder;
 let audioChunks = [];
 
+document.addEventListener('DOMContentLoaded', () => {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const target = button.getAttribute('data-target');
+
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            tabContents.forEach(content => {
+                if (content.id === target) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+        });
+    });
+});
+
 document.getElementById('record-button').addEventListener('click', async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     mediaRecorder = new MediaRecorder(stream);
@@ -43,7 +65,8 @@ async function handleFormSubmit(event) {
     });
     const result = await response.json();
     hideLoading();
-    document.getElementById('result').innerText = JSON.stringify(result, null, 2);
+    document.getElementById('transcription').innerText = result.transcription;
+    document.getElementById('summary').innerText = result.summary;
 }
 
 document.getElementById('upload-form').addEventListener('submit', handleFormSubmit);
@@ -65,4 +88,4 @@ function showLoading() {
 function hideLoading() {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('loading-bar').style.width = '0';
-}
+}S
