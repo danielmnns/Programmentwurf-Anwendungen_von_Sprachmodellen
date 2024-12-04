@@ -88,4 +88,4 @@ function showLoading() {
 function hideLoading() {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('loading-bar').style.width = '0';
-}
+}S
