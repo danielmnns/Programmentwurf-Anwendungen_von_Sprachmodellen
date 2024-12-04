@@ -16,7 +16,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2 {
+h1,
+h2 {
     text-align: center;
     color: #007bff;
     margin-bottom: 20px;
@@ -28,7 +29,9 @@ label {
     font-weight: bold;
 }
 
-input, button, audio {
+input,
+button,
+audio {
     width: 100%;
     margin-bottom: 15px;
 }
@@ -79,6 +82,38 @@ audio {
     font-size: 14px;
     font-family: monospace;
     color: #495057;
+}
+
+/* Tabs Menü */
+.tab-menu {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tab-button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
 }
 
 #loading {
