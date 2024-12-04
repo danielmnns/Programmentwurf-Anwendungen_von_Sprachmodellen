@@ -12,6 +12,5 @@
 
 
 ## Sonstiges
-
 - Deployment?
 - Responsives Design
