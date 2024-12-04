@@ -1,13 +1,43 @@
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
     padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input, button, audio {
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 input {
     padding: 10px;
-    margin-right: 10px;
-    font-size: 14px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
 button {
@@ -15,17 +45,40 @@ button {
     background-color: #007bff;
     color: white;
     border: none;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-#output {
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.record-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+audio {
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.result-section {
     margin-top: 20px;
-    font-weight: bold;
-    color: #333;
+    padding: 15px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: monospace;
+    color: #495057;
 }
 
 #loading {
