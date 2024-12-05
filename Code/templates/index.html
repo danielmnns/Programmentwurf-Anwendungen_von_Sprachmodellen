@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Audio Transcription and Summary</title>
-
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-  <!-- Zur Entwicklung  <link rel="stylesheet" href="/code/static/css/styles.css"> -->
-
+    <title>Audio Transcription and Summary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="container">
@@ -22,10 +18,10 @@
             <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
                 <h2>Upload an audio file (.mp3 or .wav):</h2>
                 <input type="file" id="audio-file" name="audio-file" accept=".mp3, .wav">
-                <button type="submit">Upload</button>
+                <button type="submit" id="submit-upload" disabled>Upload</button>
             </form>
         </div>
-        
+
         <div id="record-section" class="tab-content">
             <h2>Record your audio:</h2>
             <div class="record-buttons">
@@ -56,9 +52,7 @@
             Loading...
         </div>
 
-         <script src="{{ url_for('static', filename='js/script.js') }}"></script> 
-        <!-- Zur Entwicklung <script src="/code/static/js/script.js"></script> -->
-
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     </div>
 </body>
 </html>
