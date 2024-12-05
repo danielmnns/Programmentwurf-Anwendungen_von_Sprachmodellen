@@ -75,17 +75,57 @@ document.getElementById('record-form').addEventListener('submit', handleFormSubm
 function showLoading() {
     document.getElementById('loading').style.display = 'block';
     let width = 0;
+
+    // Fortschrittsanimation
     const interval = setInterval(() => {
-        if (width >= 100) {
-            clearInterval(interval);
-        } else {
-            width++;
-            document.getElementById('loading-bar').style.width = width + '%';
+        if (width < 90) {
+            width += Math.random() * 1,5; // Zufälliger langsamer Fortschritt bis 90 %
         }
-    }, 100);
+        document.getElementById('loading-bar').style.width = width + '%';
+
+        if (width >= 90) {
+            clearInterval(interval); // Stopp bei 90 %, bis die Serverantwort kommt
+        }
+    }, 200);
 }
+
+function completeLoading() {
+    // Ladebalken schnell auf 100 % setzen und ausblenden
+    document.getElementById('loading-bar').style.width = '100%';
+    setTimeout(() => {
+        hideLoading();
+    }, 500); // Kurze Verzögerung für den visuellen Abschluss
+}
+
+async function handleFormSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    showLoading();
+
+    try {
+        const response = await fetch('/upload', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+        completeLoading();
+
+        // Ergebnisse anzeigen
+        document.getElementById('transcription').innerText = result.transcription;
+        document.getElementById('summary').innerText = result.summary;
+
+    } catch (error) {
+        hideLoading();
+        console.error('Error during upload:', error);
+        alert('An error occurred. Please try again.');
+    }
+}
+
+document.getElementById('upload-form').addEventListener('submit', handleFormSubmit);
+document.getElementById('record-form').addEventListener('submit', handleFormSubmit);
 
 function hideLoading() {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('loading-bar').style.width = '0';
-}S
+}
