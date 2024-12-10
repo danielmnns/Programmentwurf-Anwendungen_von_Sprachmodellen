@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audio Transcription and Summary</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="/Code/static/css/styles.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Audio Transcription and Summary</h1>
@@ -13,7 +16,7 @@
             <button class="tab-button active" data-target="upload-section">Upload</button>
             <button class="tab-button" data-target="record-section">Record</button>
         </div>
-        
+
         <div id="upload-section" class="tab-content active">
             <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
                 <h2>Upload an audio file (.mp3 or .wav):</h2>
@@ -54,5 +57,10 @@
 
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 CB sei Gang. All rights reserved.</p>
+    </footer>
 </body>
+
 </html>
