@@ -5,6 +5,9 @@ body {
     padding: 0;
     background-color: #f8f9fa;
     color: #212529;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .container {
@@ -14,6 +17,7 @@ body {
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
 }
 
 h1,
@@ -97,12 +101,13 @@ audio {
     font-size: 16px;
     border: 1px solid #ced4da;
     border-radius: 5px;
-    background-color: #cce5ff; /* Hellblau als Hintergrundfarbe */
+    background-color: #cce5ff;
+    /* Hellblau als Hintergrundfarbe */
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
-    color: white; /* Optional: Lesbare Schriftfarbe */
+    color: white;
+    /* Optional: Lesbare Schriftfarbe */
 }
-
 
 .tab-button.active {
     background-color: #007bff;
@@ -131,4 +136,13 @@ audio {
     width: 0;
     height: 30px;
     background-color: #4caf50;
+}
+
+/* Footer Styles */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #343a40;
+    color: white;
+    margin-top: auto;
 }
