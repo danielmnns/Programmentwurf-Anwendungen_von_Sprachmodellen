@@ -1,3 +1,12 @@
+'''
+@Author                : Daniel<danielmannes@gmail.com>
+@CreatedDate           : 2025-01-10 18:29:08
+@LastEditors           : Daniel<danielmannes@gmail.com>
+@LastEditDate          : 2025-01-10 18:29:08
+@FilePath              : Programmentwurf-Anwendungen_von_Sprachmodellen/Code/main.py
+@CopyRight             : MerBleueAviation
+'''
+
 from flask import Flask, request, jsonify, render_template
 import os
 from werkzeug.utils import secure_filename
@@ -16,6 +25,18 @@ app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024  # Maximale Dateigröße von
 def index():
     # Route für die Startseite der Anwendung; gibt eine HTML-Vorlage zurück
     return render_template('index.html')
+
+@app.route('/datenschutz')
+def datenschutz():
+    return render_template('datenschutz.html')
+
+@app.route('/impressum')
+def impressum():
+    return render_template('impressum.html')
+
+@app.route('/kontakt')
+def kontakt():
+    return render_template('kontakt.html')
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
