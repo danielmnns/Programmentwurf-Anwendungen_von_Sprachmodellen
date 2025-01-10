@@ -1,3 +1,12 @@
+<!--
+* @Author                : Daniel<danielmannes@gmail.com>
+* @CreatedDate           : 2025-01-10 18:31:51
+* @LastEditors           : Daniel<danielmannes@gmail.com>
+* @LastEditDate          : 2025-01-10 18:31:52
+* @FilePath              : Programmentwurf-Anwendungen_von_Sprachmodellen/Code/templates/datenschutz.html
+* @CopyRight             : MerBleueAviation
+-->
+
 <!DOCTYPE html>
 <html lang="de">
 
@@ -54,13 +63,13 @@
         </section>
     </main>
     <footer class="footer">
-    <p>&copy; 2025 CB sei Gang. All rights reserved.</p>
-    <ul class="footer-links">
-         <li><a href="/Code/templates/index.html" target="_blank">Home</a></li>
-        <li><a href="/Code/templates/datenschutz.html" target="_blank">Datenschutzhinweise</a></li>
-        <li><a href="/Code/templates/impressum.html" target="_blank">Impressum</a></li>
-        <li><a href="/Code/templates/kontakt.html" target="_blank">Kontakt</a></li>
-    </ul>
+        <p>&copy; 2025 CB sei Gang. All rights reserved.</p>
+        <ul class="footer-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('datenschutz') }}">Datenschutzhinweise</a></li>
+            <li><a href="{{ url_for('impressum') }}">Impressum</a></li>
+            <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
+        </ul>
     </footer>
 </body>
 
