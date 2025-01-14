@@ -1,138 +1,147 @@
 /* Global Styles */
+/* Allgemeine Einstellungen für den Body: Schriftart, Abstände, Hintergrundfarbe, Textfarbe und Layout */
 body {
-    font-family: 'Roboto', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f9fa;
-    color: #212529;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    font-family: 'Roboto', Arial, sans-serif; /* Hauptschriftart */
+    margin: 0; /* Kein äußerer Abstand */
+    padding: 0; /* Kein innerer Abstand */
+    background-color: #f8f9fa; /* Hellgraue Hintergrundfarbe */
+    color: #212529; /* Dunkle Textfarbe */
+    display: flex; /* Flexbox für Layout */
+    flex-direction: column; /* Inhalt vertikal anordnen */
+    min-height: 100vh; /* Mindestens die volle Höhe des Viewports */
 }
 
+/* Allgemeine Container-Stile für zentrale Inhalte */
 .container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex: 1;
+    max-width: 800px; /* Maximale Breite des Containers */
+    margin: 50px auto; /* Zentrierung mit Außenabständen */
+    padding: 20px; /* Innenabstand */
+    background: #ffffff; /* Weißer Hintergrund */
+    border-radius: 10px; /* Abgerundete Ecken */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Schatteneffekt */
+    flex: 1; /* Flex-Eigenschaft zur Anpassung der Höhe */
 }
 
+/* Container-Stil für Unterseiten, mit kleinerer maximaler Breite */
 .container-unterseiten {
     max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex: 1;
+    /* Weitere Eigenschaften wie .container */
 }
 
-h1,
-h2 {
-    text-align: center;
-    color: #007bff;
-    margin-bottom: 20px;
+/* Stile für Überschriften */
+h1, h2 {
+    text-align: center; /* Zentrierter Text */
+    color: #007bff; /* Blau als Akzentfarbe */
+    margin-bottom: 20px; /* Abstand unterhalb der Überschrift */
 }
 
+/* Stile für Beschriftungen von Formularfeldern */
 label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
+    display: block; /* Blockdarstellung */
+    margin-bottom: 10px; /* Abstand unterhalb */
+    font-weight: bold; /* Fettgedruckter Text */
 }
 
-input,
-button,
-audio {
-    width: 100%;
-    margin-bottom: 15px;
+/* Globale Stile für Eingabe-, Button- und Audio-Elemente */
+input, button, audio {
+    width: 100%; /* Volle Breite */
+    margin-bottom: 15px; /* Abstand nach unten */
 }
 
+/* Eingabefelder: Polsterung und Rahmen */
 input {
     padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
+    border: 1px solid #ced4da; /* Grauer Rahmen */
+    border-radius: 5px; /* Abgerundete Ecken */
     font-size: 16px;
 }
 
+/* Buttons: Hintergrundfarbe, Polsterung und Cursor */
 button {
     padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+    background-color: #007bff; /* Blau */
+    color: white; /* Weißer Text */
     border: none;
-    border-radius: 5px;
+    border-radius: 5px; /* Abgerundete Ecken */
     font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    cursor: pointer; /* Zeigt klickbare Bereiche an */
+    transition: background-color 0.3s ease; /* Glatte Farbänderung */
 }
 
+/* Hover-Effekt für Buttons */
 button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Dunkleres Blau */
 }
 
+/* Deaktivierte Buttons */
 button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
+    background-color: #cccccc; /* Grau */
+    cursor: not-allowed; /* Zeigt, dass keine Aktion möglich ist */
 }
 
+/* Spezielle Ausrichtung von Aufnahme-Buttons */
 .record-buttons {
     display: flex;
-    justify-content: space-between;
-    gap: 10px;
+    justify-content: space-between; /* Buttons gleichmäßig verteilen */
+    gap: 10px; /* Abstand zwischen Buttons */
 }
 
+/* Audio-Elemente: Abstand und abgerundete Ecken */
 audio {
     margin-top: 10px;
     border-radius: 5px;
 }
 
+/* Ergebnisbereich */
 .result-section {
     margin-top: 20px;
     padding: 15px;
-    background-color: #e9ecef;
+    background-color: #e9ecef; /* Hellgrau */
     border-radius: 5px;
     font-size: 14px;
-    font-family: monospace;
-    color: #495057;
+    font-family: monospace; /* Monospace-Schriftart */
+    color: #495057; /* Dunkelgrau */
 }
 
 /* Tabs Menü */
+/* Stile für das Tabs-Menü */
 .tab-menu {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Zentrierung */
     margin-bottom: 20px;
-    gap: 10px;
+    gap: 10px; /* Abstand zwischen Tabs */
 }
 
+/* Buttons im Tabs-Menü */
 .tab-button {
     padding: 10px 20px;
     font-size: 16px;
-    border: 1px solid #ced4da;
+    border: 1px solid #ced4da; /* Grauer Rahmen */
     border-radius: 5px;
-    background-color: #cce5ff;
-    /* Hellblau als Hintergrundfarbe */
+    background-color: #cce5ff; /* Hellblau */
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
-    color: white;
-    /* Optional: Lesbare Schriftfarbe */
+    color: white; /* Weißer Text */
 }
 
+/* Aktiver Tab-Button */
 .tab-button.active {
-    background-color: #007bff;
+    background-color: #007bff; /* Blau */
     color: white;
     border-color: #007bff;
 }
 
+/* Tab-Inhalte: Standardmäßig versteckt */
 .tab-content {
     display: none;
 }
 
+/* Aktiver Tab-Inhalt */
 .tab-content.active {
     display: block;
 }
 
+/* Ladebalken */
 #loading {
     display: none;
     width: 100%;
@@ -145,73 +154,68 @@ audio {
 #loading-bar {
     width: 0;
     height: 30px;
-    background-color: #4caf50;
+    background-color: #4caf50; /* Grün */
 }
 
 /* Footer Styles */
 .footer {
-    text-align: center;
+    text-align: center; /* Zentrierung */
     padding: 20px;
-    background-color: #343a40;
+    background-color: #343a40; /* Dunkelgrau */
     color: white;
-    margin-top: auto;
+    margin-top: auto; /* Abstand von Inhalten nach oben */
 }
 
+/* Links im Footer */
 .footer-links {
-    list-style: none;
+    list-style: none; /* Entfernt Aufzählungszeichen */
     padding: 0;
     margin: 10px 0 0;
     display: flex;
     justify-content: center;
-    gap: 15px;
-}
-
-.footer-links li {
-    display: inline;
+    gap: 15px; /* Abstand zwischen Links */
 }
 
 .footer-links a {
-    color: #007bff;
-    text-decoration: none;
+    color: #007bff; /* Blau */
+    text-decoration: none; /* Entfernt Unterstrich */
     transition: color 0.3s ease;
 }
 
+/* Hover-Effekt für Links */
 .footer-links a:hover {
-    color: #00aaff;
+    color: #00aaff; /* Helleres Blau */
 }
 
-/* Kontakt Formular */
+/* Kontaktformular */
 .contact-form {
     margin-top: 20px;
 }
 
+/* Formulargruppen */
 .form-group {
     margin-bottom: 15px;
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
+/* Eingabefelder und Textbereiche */
 input, textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #ddd; /* Heller Rahmen */
     border-radius: 5px;
     box-sizing: border-box;
 }
 
 input:focus, textarea:focus {
-    border-color: #007BFF;
+    border-color: #007BFF; /* Blau bei Fokus */
     outline: none;
 }
 
 textarea {
-    resize: vertical;
+    resize: vertical; /* Nur vertikale Größenänderung */
 }
 
+/* PDF-Download-Button */
 #download-pdf {
     padding: 10px 10px;
     background-color: #007bff;
@@ -224,6 +228,7 @@ textarea {
     display: block; 
 }
 
+/* Deaktivierter PDF-Button */
 #download-pdf:disabled {
     background-color: #cccccc;
     cursor: not-allowed;

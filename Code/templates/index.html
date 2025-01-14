@@ -1,88 +1,86 @@
-<!--
-* @Author                : Daniel<danielmannes@gmail.com>
-* @CreatedDate           : 2025-01-14 13:34:56
-* @LastEditors           : Daniel<danielmannes@gmail.com>
-* @LastEditDate          : 2025-01-14 13:34:56
-* @FilePath              : Programmentwurf-Anwendungen_von_Sprachmodellen/Code/templates/index.html
--->
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> <!-- Definiert die Sprache des Dokuments als Englisch -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Transcription and Summary</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="/Code/static/css/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <!-- Metadaten und Ressourcen der Seite -->
+    <meta charset="UTF-8"> <!-- Zeichencodierung für Sonderzeichen -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsives Design für Mobilgeräte -->
+    <title>Audio Transcription and Summary</title> <!-- Titel der Seite -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Einbindung einer CSS-Datei mit Jinja2 -->
+    <link rel="stylesheet" href="/Code/static/css/styles.css"> <!-- Alternative direkte Einbindung der CSS-Datei -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script> <!-- Bibliothek für PDF-Generierung -->
 </head>
 
 <body>
-    <div class="container">
-        <h1>Audio Transcription and Summary</h1>
+    <div class="container"> <!-- Wrapper für den Seiteninhalt -->
+        <h1>Audio Transcription and Summary</h1> <!-- Hauptüberschrift der Seite -->
+
+        <!-- Tab-Menü für die Auswahl zwischen Hochladen und Aufnehmen -->
         <div class="tab-menu">
-            <button class="tab-button active" data-target="upload-section">Upload</button>
-            <button class="tab-button" data-target="record-section">Record</button>
+            <button class="tab-button active" data-target="upload-section">Upload</button> <!-- Button für Upload -->
+            <button class="tab-button" data-target="record-section">Record</button> <!-- Button für Aufnahme -->
         </div>
 
-        <div id="upload-section" class="tab-content active">
-            <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
-                <h2>Upload an audio file (.mp3 or .wav):</h2>
-                <input type="file" id="audio-file" name="audio-file" accept=".mp3, .wav">
-                <button type="submit" id="submit-upload" disabled>Upload</button>
+        <!-- Upload-Bereich -->
+        <div id="upload-section" class="tab-content active"> <!-- Bereich für das Hochladen von Audiodateien -->
+            <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data"> <!-- Formular für Datei-Upload -->
+                <h2>Upload an audio file (.mp3 or .wav):</h2> <!-- Beschreibung -->
+                <input type="file" id="audio-file" name="audio-file" accept=".mp3, .wav"> <!-- Datei-Upload-Feld -->
+                <button type="submit" id="submit-upload" disabled>Upload</button> <!-- Deaktivierter Upload-Button -->
             </form>
         </div>
 
-        <div id="record-section" class="tab-content">
-            <h2>Record your audio:</h2>
+        <!-- Aufnahme-Bereich -->
+        <div id="record-section" class="tab-content"> <!-- Bereich für die Audioaufnahme -->
+            <h2>Record your audio:</h2> <!-- Beschreibung -->
             <div class="record-buttons">
-                <button id="record-button">Record</button>
-                <button id="stop-button" disabled>Stop</button>
+                <button id="record-button">Record</button> <!-- Starten der Aufnahme -->
+                <button id="stop-button" disabled>Stop</button> <!-- Stoppen der Aufnahme -->
             </div>
-            <audio id="audio-playback" controls></audio>
-            <form id="record-form" action="/upload" method="post" enctype="multipart/form-data">
-                <input type="hidden" id="recorded-audio" name="recorded-audio">
-                <button type="submit" id="submit-recording" disabled>Submit Recording</button>
+            <audio id="audio-playback" controls></audio> <!-- Audioplayer zur Wiedergabe der Aufnahme -->
+            <form id="record-form" action="/upload" method="post" enctype="multipart/form-data"> <!-- Formular für die Aufnahme -->
+                <input type="hidden" id="recorded-audio" name="recorded-audio"> <!-- Verstecktes Feld für die Aufnahme-Daten -->
+                <button type="submit" id="submit-recording" disabled>Submit Recording</button> <!-- Button zum Hochladen der Aufnahme -->
             </form>
         </div>
 
-        <h1>Transcription and Summary</h1>
-        <section class="result-section">
+        <!-- Bereich für Transkription und Zusammenfassung -->
+        <h1>Transcription and Summary</h1> 
+        <section class="result-section"> <!-- Ergebnisbereich -->
             <div class="transcription-section">
-                <h2>Transcription:</h2>
-                <div id="transcription" class="result-box"></div>
+                <h2>Transcription:</h2> <!-- Überschrift für die Transkription -->
+                <div id="transcription" class="result-box"></div> <!-- Box für Transkriptionsergebnisse -->
             </div>
             <div class="summary-section">
-                <h2>Summary:</h2>
-                <div id="summary" class="result-box"></div>
+                <h2>Summary:</h2> <!-- Überschrift für die Zusammenfassung -->
+                <div id="summary" class="result-box"></div> <!-- Box für Zusammenfassungsergebnisse -->
             </div>
         </section>
 
-        <div id="loading">
-            <div id="loading-bar"></div>
+        <!-- Ladeanzeige -->
+        <div id="loading"> 
+            <div id="loading-bar"></div> <!-- Visueller Ladebalken -->
             Loading...
         </div>
 
-        
+        <!-- PDF-Download-Button -->
         <div class="download-button">
-            <button id="download-pdf" onclick="downloadPDF()" disabled>Download as PDF</button>
+            <button id="download-pdf" onclick="downloadPDF()" disabled>Download as PDF</button> <!-- Deaktivierter Button für PDF-Download -->
         </div>
 
-        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <!-- Skriptdatei -->
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script> <!-- JavaScript-Datei mit Jinja2 eingebunden -->
     </div>
 
-    <footer class="footer">
-        <p>&copy; 2025 TINF22. All rights reserved.</p>
-        <ul class="footer-links">
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('datenschutz') }}">Datenschutzhinweise</a></li>
-            <li><a href="{{ url_for('impressum') }}">Impressum</a></li>
-            <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
+    <!-- Fußzeile mit zusätzlichen Links -->
+    <footer class="footer"> <!-- Footer-Bereich mit einer spezifischen Klasse -->
+        <p>&copy; 2025 TINF22. All rights reserved.</p> <!-- Copyright-Information -->
+        <ul class="footer-links"> <!-- Liste mit Links zu weiteren Seiten -->
+            <li><a href="{{ url_for('index') }}">Home</a></li> <!-- Link zur Startseite -->
+            <li><a href="{{ url_for('datenschutz') }}">Privacy Policy</a></li> <!-- Link zu den Datenschutzhinweisen -->
+            <li><a href="{{ url_for('impressum') }}">Imprint</a></li> <!-- Link zum Impressum -->
+            <li><a href="{{ url_for('kontakt') }}">Contact Us</a></li> <!-- Link zur Kontaktseite -->
         </ul>
     </footer>
-    
 </body>
-
 </html>

@@ -1,54 +1,51 @@
-<!--
-* @Author                : Daniel<danielmannes@gmail.com>
-* @CreatedDate           : 2025-01-10 18:32:07
-* @LastEditors           : Daniel<danielmannes@gmail.com>
-* @LastEditDate          : 2025-01-10 18:32:07
-* @FilePath              : Programmentwurf-Anwendungen_von_Sprachmodellen/Code/templates/kontakt.html
-* @CopyRight             : MerBleueAviation
--->
-
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html> 
+<html lang="en"> <!-- Definiert die Sprache des Dokuments als Englisch -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontakt</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="/Code/static/css/styles.css">
+    <!-- Metadaten und Ressourcen der Seite -->
+    <meta charset="UTF-8"> <!-- Zeichencodierung, die Umlaute und Sonderzeichen unterstützt -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ermöglicht ein responsives Design -->
+    <title>Contact Us</title> <!-- Titel der Seite -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- CSS-Datei, eingebunden mit Jinja2 -->
+    <link rel="stylesheet" href="/Code/static/css/styles.css"> <!-- Alternative direkte CSS-Einbindung -->
 </head>
 
 <body>
+    <!-- Hauptbereich der Seite -->
     <main class="container-unterseiten">
-        <h1>Kontakt</h1>
-        <p>Wir freuen uns, von Ihnen zu hören. Bitte füllen Sie das untenstehende Formular aus. </p>
-        <form class="contact-form">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Ihr Name" required>
+        <h1>Contact Us</h1> <!-- Hauptüberschrift -->
+        <p>We look forward to hearing from you. Please fill out the form below. </p> <!-- Einführungstext -->
+
+        <!-- Kontaktformular -->
+        <form class="contact-form"> <!-- Formular für Benutzereingaben -->
+            <div class="form-group"> <!-- Gruppiert das Namensfeld -->
+                <label for="name">Name</label> <!-- Beschriftung des Namensfelds -->
+                <input type="text" id="name" name="name" placeholder="Your Name" required> <!-- Textfeld für den Namen -->
             </div>
-            <div class="form-group">
-                <label for="email">E-Mail</label>
-                <input type="email" id="email" name="email" placeholder="Ihre E-Mail-Adresse" required>
+            <div class="form-group"> <!-- Gruppiert das E-Mail-Feld -->
+                <label for="email">E-Mail</label> <!-- Beschriftung des E-Mail-Felds -->
+                <input type="email" id="email" name="email" placeholder="Your e-mail address" required> <!-- Eingabefeld für E-Mails -->
             </div>
-            <div class="form-group">
-                <label for="subject">Betreff</label>
-                <input type="text" id="subject" name="subject" placeholder="Betreff" required>
+            <div class="form-group"> <!-- Gruppiert das Betreff-Feld -->
+                <label for="subject">Subject</label> <!-- Beschriftung des Betreff-Felds -->
+                <input type="text" id="subject" name="subject" placeholder="Subject" required> <!-- Eingabefeld für den Betreff -->
             </div>
-            <div class="form-group">
-                <label for="message">Nachricht</label>
-                <textarea id="message" name="message" rows="5" placeholder="Ihre Nachricht" required></textarea>
+            <div class="form-group"> <!-- Gruppiert das Nachrichtenfeld -->
+                <label for="message">Message</label> <!-- Beschriftung des Nachrichtenfelds -->
+                <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea> <!-- Textbereich für die Nachricht -->
             </div>
-            <button type="submit" class="btn">Absenden</button>
+            <button type="submit" class="btn">Submit</button> <!-- Senden-Button -->
         </form>
     </main>
-    <footer class="footer">
-        <p>&copy; 2025 TINF22. All rights reserved.</p>
-        <ul class="footer-links">
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('datenschutz') }}">Datenschutzhinweise</a></li>
-            <li><a href="{{ url_for('impressum') }}">Impressum</a></li>
-            <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
+
+    <!-- Fußzeile mit zusätzlichen Links -->
+    <footer class="footer"> <!-- Footer-Bereich mit einer spezifischen Klasse -->
+        <p>&copy; 2025 TINF22. All rights reserved.</p> <!-- Copyright-Information -->
+        <ul class="footer-links"> <!-- Liste mit Links zu weiteren Seiten -->
+            <li><a href="{{ url_for('index') }}">Home</a></li> <!-- Link zur Startseite -->
+            <li><a href="{{ url_for('datenschutz') }}">Privacy Policy</a></li> <!-- Link zu den Datenschutzhinweisen -->
+            <li><a href="{{ url_for('impressum') }}">Imprint</a></li> <!-- Link zum Impressum -->
+            <li><a href="{{ url_for('kontakt') }}">Contact Us</a></li> <!-- Link zur Kontaktseite -->
         </ul>
     </footer>
 </body>

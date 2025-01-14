@@ -1,73 +1,76 @@
-<!--
-* @Author                : Daniel<danielmannes@gmail.com>
-* @CreatedDate           : 2025-01-10 18:31:00
-* @LastEditors           : Daniel<danielmannes@gmail.com>
-* @LastEditDate          : 2025-01-14 13:34:43
-* @FilePath              : Programmentwurf-Anwendungen_von_Sprachmodellen/Code/templates/datenschutz.html
--->
-
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en"> <!-- Dokumenttyp und Sprache auf Englisch festlegen -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datenschutzhinweise</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="/Code/static/css/styles.css">
+    <!-- Metadaten und Verknüpfungen für die Seite -->
+    <meta charset="UTF-8"> <!-- Zeichencodierung für Sonderzeichen -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive Design ermöglichen -->
+    <title>Privacy Policy</title> <!-- Titel der Seite, der im Browser angezeigt wird -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Einbindung einer CSS-Datei mit Jinja2-Syntax -->
+    <link rel="stylesheet" href="/Code/static/css/styles.css"> <!-- Fallback oder direkte Einbindung einer CSS-Datei -->
 </head>
 
 <body>
-    <main class="container-unterseiten">
-        <h1>Datenschutzhinweise</h1>
+    <!-- Hauptinhalt der Datenschutzhinweise -->
+    <main class="container-unterseiten"> <!-- Wrapper für den Hauptinhalt mit einer spezifischen Klasse -->
+        <h1>Privacy Policy</h1> <!-- Überschrift der Seite -->
+
+        <!-- Abschnitt 1: Verantwortlicher -->
         <section>
-            <h2>1. Verantwortlicher</h2>
+            <h2>1. Responsible Person</h2> <!-- Abschnittsüberschrift -->
             <p>
-                Verantwortlich für die Verarbeitung Ihrer personenbezogenen Daten im Sinne der Datenschutzgesetze ist:
+                Responsible for the processing of your personal data within the meaning of the data protection laws is:
             </p>
             <p>
+                <!-- Informationen zum Verantwortlichen -->
                 <strong>TINF22</strong><br>
                 Marienstraße 20<br>
                 89518 Heidenheim an der Brenz<br>
-                E-Mail: <a href="mailto:test@test.de">test@test.de</a>
+                E-Mail: <a href="mailto:test@test.de">test@test.de</a> <!-- E-Mail-Link -->
             </p>
         </section>
+
+        <!-- Abschnitt 2: Erhobene Daten und Verarbeitungszweck -->
         <section>
-            <h2>2. Erhobene Daten und Zweck der Verarbeitung</h2>
+            <h2>2. Data collected and purpose of processing</h2>
             <p>
-                Wir erheben personenbezogene Daten wie IP-Adressen, Browserinformationen und Audiodateien,
-                um unsere Dienstleistungen anzubieten und die Sicherheit der Webseite zu gewährleisten.
+                We collect personal data such as IP addresses, browser information and audio files in order to provide our services and ensure the security of the website.
             </p>
         </section>
+
+        <!-- Abschnitt 3: Rechte der Nutzer -->
         <section>
-            <h2>3. Ihre Rechte</h2>
+            <h2>3. Your Rights</h2>
             <p>
-                Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Widerspruch gegen die Verarbeitung
-                Ihrer personenbezogenen Daten. Kontaktieren Sie uns unter der oben angegebenen E-Mail-Adresse.
+                You have the right to information, correction, deletion and objection to the processing of your personal data. Please contact us at the e-mail address given above.
             </p>
         </section>
+
+        <!-- Abschnitt 4: Datensicherheit -->
         <section>
-            <h2>4. Datensicherheit</h2>
+            <h2>4. Data security</h2>
             <p>
-                Wir verwenden technische und organisatorische Maßnahmen, um Ihre Daten vor Verlust,
-                Missbrauch und unbefugtem Zugriff zu schützen.
+                We use technical and organizational measures to protect your data from loss, misuse and unauthorized access.
             </p>
         </section>
+
+        <!-- Abschnitt 5: Änderungen an den Datenschutzhinweisen -->
         <section>
-            <h2>5. Änderungen</h2>
+            <h2>5. Changes</h2>
             <p>
-                Diese Datenschutzhinweise können bei Bedarf aktualisiert werden. Die aktuelle Version
-                finden Sie immer auf dieser Seite.
+                This data protection notice can be updated if necessary. You will always find the current version on this page.
             </p>
         </section>
     </main>
-    <footer class="footer">
-        <p>&copy; 2025 TINF22. All rights reserved.</p>
-        <ul class="footer-links">
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('datenschutz') }}">Datenschutzhinweise</a></li>
-            <li><a href="{{ url_for('impressum') }}">Impressum</a></li>
-            <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
+
+    <!-- Fußzeile mit zusätzlichen Links -->
+    <footer class="footer"> <!-- Footer-Bereich mit einer spezifischen Klasse -->
+        <p>&copy; 2025 TINF22. All rights reserved.</p> <!-- Copyright-Information -->
+        <ul class="footer-links"> <!-- Liste mit Links zu weiteren Seiten -->
+            <li><a href="{{ url_for('index') }}">Home</a></li> <!-- Link zur Startseite -->
+            <li><a href="{{ url_for('datenschutz') }}">Privacy Policy</a></li> <!-- Link zu den Datenschutzhinweisen -->
+            <li><a href="{{ url_for('impressum') }}">Imprint</a></li> <!-- Link zum Impressum -->
+            <li><a href="{{ url_for('kontakt') }}">Contact Us</a></li> <!-- Link zur Kontaktseite -->
         </ul>
     </footer>
 </body>

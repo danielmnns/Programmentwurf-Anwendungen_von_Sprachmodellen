@@ -1,63 +1,68 @@
-<!--
-* @Author                : Daniel<danielmannes@gmail.com>
-* @CreatedDate           : 2025-01-10 18:31:00
-* @LastEditors           : Daniel<danielmannes@gmail.com>
-* @LastEditDate          : 2025-01-14 13:34:17
-* @FilePath              : Programmentwurf-Anwendungen_von_Sprachmodellen/Code/templates/impressum.html
--->
-
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en"> <!-- Definiert die Sprache des Dokuments als Englisch -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impressum</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="/Code/static/css/styles.css">
+    <!-- Metadaten und Ressourcen der Seite -->
+    <meta charset="UTF-8"> <!-- Zeichencodierung für Sonderzeichen -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsives Design für Mobilgeräte -->
+    <title>Imprint</title> <!-- Titel der Seite, der im Browser-Tab angezeigt wird -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Dynamische Einbindung der CSS-Datei mit Jinja2 -->
+    <link rel="stylesheet" href="/Code/static/css/styles.css"> <!-- Fallback oder direkte CSS-Datei -->
 </head>
 
 <body>
-    <main class="container-unterseiten">
-        <h1>Impressum</h1>
-         <section class="company-details">
-            <h2>Angaben gemäß § 5 TMG</h2>
+    <!-- Hauptinhalt der Seite -->
+    <main class="container-unterseiten"> <!-- Wrapper für den Hauptinhalt mit spezifischer Klasse -->
+        <h1>Imprint</h1> <!-- Hauptüberschrift der Seite -->
+
+        <!-- Abschnitt: Angaben gemäß § 5 TMG -->
+        <section class="company-details"> <!-- Abschnitt für Unternehmensangaben -->
+            <h2>Information according to § 5 TMG</h2> <!-- Abschnittsüberschrift -->
             <p>
+                <!-- Unternehmensinformationen -->
                 TINF22<br>
                 Marienstraße 20<br>
                 89518 Heidenheim an der Brenz<br>
             </p>
         </section>
-        <section class="contact">
-            <h2>Kontakt</h2>
+
+        <!-- Abschnitt: Kontaktinformationen -->
+        <section class="contact"> <!-- Abschnitt für Kontaktangaben -->
+            <h2>Contact Us</h2> <!-- Abschnittsüberschrift -->
             <p>
-                Telefon: +49 (0) 123 456 789<br>
-                E-Mail: <a href="mailto:test@test.de">test@test.de</a>
+                Telefon: +49 (0) 123 456 789<br> <!-- Beispiel-Telefonnummer -->
+                E-Mail: <a href="mailto:test@test.de">test@test.de</a> <!-- E-Mail-Adresse als anklickbarer Link -->
             </p>
         </section>
-        <section class="responsibility">
-            <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+
+        <!-- Abschnitt: Verantwortlicher nach RStV -->
+        <section class="responsibility"> <!-- Abschnitt für Verantwortliche -->
+            <h2>Responsible for the content according to § 55 Abs. 2 RStV</h2> <!-- Abschnittsüberschrift -->
             <p>
+                <!-- Verantwortliche Person oder Organisation -->
                 TINF22<br>
                 Marienstraße 20<br>
                 89518 Heidenheim an der Brenz<br>
             </p>
         </section>
-        <section class="disclaimer">
-            <h2>Haftungsausschluss</h2>
+
+        <!-- Abschnitt: Haftungsausschluss -->
+        <section class="disclaimer"> <!-- Abschnitt für den Haftungsausschluss -->
+            <h2>Disclaimer</h2> <!-- Abschnittsüberschrift -->
             <p>
-                Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und 
-                Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.
+                The contents of our pages have been compiled with the utmost care. However, we cannot accept any liability for the accuracy, completeness and up-to-dateness of the content. <!-- Hinweis zur Haftung -->
             </p>
         </section>
     </main>
-    <footer class="footer">
-        <p>&copy; 2025 TINF22. All rights reserved.</p>
-        <ul class="footer-links">
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('datenschutz') }}">Datenschutzhinweise</a></li>
-            <li><a href="{{ url_for('impressum') }}">Impressum</a></li>
-            <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
+
+    <!-- Fußzeile mit zusätzlichen Links -->
+    <footer class="footer"> <!-- Footer-Bereich mit einer spezifischen Klasse -->
+        <p>&copy; 2025 TINF22. All rights reserved.</p> <!-- Copyright-Information -->
+        <ul class="footer-links"> <!-- Liste mit Links zu weiteren Seiten -->
+            <li><a href="{{ url_for('index') }}">Home</a></li> <!-- Link zur Startseite -->
+            <li><a href="{{ url_for('datenschutz') }}">Privacy Policy</a></li> <!-- Link zu den Datenschutzhinweisen -->
+            <li><a href="{{ url_for('impressum') }}">Imprint</a></li> <!-- Link zum Impressum -->
+            <li><a href="{{ url_for('kontakt') }}">Contact Us</a></li> <!-- Link zur Kontaktseite -->
         </ul>
     </footer>
 </body>

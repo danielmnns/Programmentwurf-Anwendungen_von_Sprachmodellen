@@ -1,18 +1,9 @@
-'''
-@Author                : Daniel<danielmannes@gmail.com>
-@CreatedDate           : 2025-01-10 18:29:08
-@LastEditors           : Daniel<danielmannes@gmail.com>
-@LastEditDate          : 2025-01-10 18:29:08
-@FilePath              : Programmentwurf-Anwendungen_von_Sprachmodellen/Code/main.py
-@CopyRight             : MerBleueAviation
-'''
-
 from flask import Flask, request, jsonify, render_template
 import os
 from werkzeug.utils import secure_filename
 import base64
-from transcribe import transcribe_audio
-from summarize import summarize_text
+from transcribe import transcribe_audio  # Funktion zur Transkription von Audio
+from summarize import summarize_text  # Funktion zur Zusammenfassung von Text
 
 # Erstelle eine Flask-App-Instanz
 app = Flask(__name__)
@@ -24,19 +15,22 @@ app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024  # Maximale Dateigröße von
 @app.route('/')
 def index():
     # Route für die Startseite der Anwendung; gibt eine HTML-Vorlage zurück
-    return render_template('index.html')
+    return render_template('index.html')  # Rendert die HTML-Datei "index.html"
 
 @app.route('/datenschutz')
 def datenschutz():
-    return render_template('datenschutz.html')
+    # Route für die Seite mit Datenschutzhinweisen
+    return render_template('datenschutz.html')  # Rendert die HTML-Datei "datenschutz.html"
 
 @app.route('/impressum')
 def impressum():
-    return render_template('impressum.html')
+    # Route für das Impressum
+    return render_template('impressum.html')  # Rendert die HTML-Datei "impressum.html"
 
 @app.route('/kontakt')
 def kontakt():
-    return render_template('kontakt.html')
+    # Route für die Kontaktseite
+    return render_template('kontakt.html')  # Rendert die HTML-Datei "kontakt.html"
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -45,15 +39,15 @@ def upload_file():
         # Überprüfung, ob eine Datei hochgeladen wurde
         audio_file = request.files['audio-file']  # Zugriff auf die hochgeladene Datei
         filename = secure_filename(audio_file.filename)  # Sichere den Dateinamen
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)  # Bestimme den Pfad
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)  # Bestimme den Speicherpfad
         audio_file.save(file_path)  # Speichere die Datei auf dem Server
     elif 'recorded-audio' in request.form:
         # Verarbeitung von Audio-Daten, die direkt vom Benutzer aufgezeichnet wurden
         audio_data = request.form['recorded-audio'].split(",")[1]  # Extrahiere den Base64-kodierten Inhalt
-        filename = "recorded_audio.wav"  # Definiere einen Standardnamen für die Aufnahme
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)  # Pfad zur Speicherung
+        filename = "recorded_audio.wav"  # Standardname für die aufgezeichnete Datei
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)  # Speicherpfad
         with open(file_path, "wb") as f:
-            f.write(base64.b64decode(audio_data))  # Dekodiere und speichere die Audio-Daten
+            f.write(base64.b64decode(audio_data))  # Dekodiere und speichere die Audiodaten
     else:
         # Wenn keine Datei bereitgestellt wird, sende eine Fehlermeldung
         return jsonify({"error": "No audio file provided"}), 400
