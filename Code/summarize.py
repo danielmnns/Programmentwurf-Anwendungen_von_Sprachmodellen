@@ -1,10 +1,9 @@
 '''
 @Author                : Daniel<danielmannes@gmail.com>
-@CreatedDate           : 2025-01-14 13:14:23
+@CreatedDate           : 2025-01-14 13:30:34
 @LastEditors           : Daniel<danielmannes@gmail.com>
-@LastEditDate          : 2025-01-14 13:14:23
+@LastEditDate          : 2025-01-14 13:30:34
 @FilePath              : Programmentwurf-Anwendungen_von_Sprachmodellen/Code/summarize.py
-@CopyRight             : MerBleueAviation
 '''
 
 import requests
@@ -16,11 +15,11 @@ def summarize_text(text):
     
     # Wir können die Benutzeranweisung anpassen, je nachdem, welche Sprache erkannt wird
     if language == 'de':
-        summary_instruction = 'Fasse die wichtigsten Punkte aus dem folgenden Text zusammen und liste alle To-Dos auf. Gib diese dann in der Sprache der Eingabe wider.'
+        summary_instruction = 'Fasse die wichtigsten Punkte aus dem folgenden Text zusammen und liste alle To-Dos auf.'
     elif language == 'en':
-        summary_instruction = 'Summarize the main points of the following text and list all the to-dos. Provide this summary in the language of the input.'
+        summary_instruction = 'Summarize the main points of the following text and list all the to-dos.'
     else:
-        summary_instruction = 'Summarize the main points of the following text and list all the to-dos. Provide this summary in the language of the input.'
+        summary_instruction = 'Summarize the main points of the following text and list all the to-dos.'
 
     url = "http://127.0.0.1:11434/api/chat"  # Ollama API-Endpunkt
     payload = {
