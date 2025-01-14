@@ -1,21 +1,20 @@
 # Backlog
 **Team Members:**
-- Marcel
-- Max
-- Philipp
-- Daniel
+- Marcel Rupprich
+- Max Knoblauch
+- Philipp Rogler
+- Daniel Mannes
 
 ## Frontend
-- Upload/Record Seite
-- Styling
-- Datenschutzhinweise
-- PDF Download
-
+- **Upload/Record Seite:** Benutzer sollen Meeting-Aufzeichnungen hochladen oder aufnehmen können.
+- **Styling:** Ansprechendes Design der Benutzeroberfläche.
+- **Datenschutzhinweise:** Integration von Hinweisen zum Datenschutz für den Nutzer.
+- **PDF Download:** Möglichkeit, das Protokoll als PDF herunterzuladen.
 
 ## Backend
-
-
+- **Transkription:** Implementierung einer Transkription.
+- **Zusammenfassung:** KI zur Erkennung und Markierung von wichtigen Themen, Aufgaben und Entscheidungen.
 
 ## Sonstiges
-- Deployment?
-- Responsives Design
+- **Deployment:** Entscheidungen zum Deployment
+- **Responsives Design:** Sicherstellen, dass das Tool auf verschiedenen Geräten (Desktop, Mobil) gut funktioniert.
