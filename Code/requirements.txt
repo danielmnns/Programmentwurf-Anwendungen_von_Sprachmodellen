@@ -8,5 +8,4 @@ ollama
 openai-whisper
 ffmpeg-python
 requests
-
-
+langdetect
