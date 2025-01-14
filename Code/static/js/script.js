@@ -145,16 +145,40 @@ document.addEventListener('DOMContentLoaded', () => {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
-            doc.setFontSize(16);
-            doc.text("Transcription", 10, 10);
-            doc.setFontSize(12);
-            doc.text(transcription, 10, 20, { maxWidth: 180 });
+            // Konfiguration für die PDF-Ausgabe
+            const marginX = 20; // Rand links und rechts
+            const marginY = 20; // Rand oben
+            const lineSpacing = 10; // Abstand zwischen Fließtext und nächster Überschrift
 
+            // Erste Seite: Transcription
+            doc.setFont("Helvetica", "bold");
             doc.setFontSize(16);
-            doc.text("Summary", 10, 40);
-            doc.setFontSize(12);
-            doc.text(summary, 10, 50, { maxWidth: 180 });
+            doc.text("Transcription", 105, marginY, { align: "center" });
 
+            // Fließtext: Transcription
+            doc.setFont("Helvetica", "normal");
+            doc.setFontSize(12);
+            let cursorY = marginY + 10;
+            doc.text(transcription, marginX, cursorY, { maxWidth: 170 });
+
+            // Abstand zwischen Fließtext und nächster Überschrift
+            cursorY += doc.getTextDimensions(transcription).h + lineSpacing;
+
+            // Neue Seite für die Zusammenfassung
+            doc.addPage();
+
+            // Zweite Seite: Summary
+            doc.setFont("Helvetica", "bold");
+            doc.setFontSize(16);
+            doc.text("Summary", 105, marginY, { align: "center" });
+
+            // Fließtext: Summary
+            doc.setFont("Helvetica", "normal");
+            doc.setFontSize(12);
+            cursorY = marginY + 10;
+            doc.text(summary, marginX, cursorY, { maxWidth: 170 });
+
+            // PDF speichern
             doc.save("Transcription_and_Summary.pdf");
         } else {
             alert('Transcription or Summary is missing.');
