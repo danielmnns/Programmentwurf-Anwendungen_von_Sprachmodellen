@@ -1,14 +1,16 @@
 # Systemsetup
-Projektbeschreibung
 
-Unser Projekt bietet eine benutzerfreundliche Lösung zur Audioverarbeitung mit automatischer Transkription und Zusammenfassung. Das System ermöglicht es, Audioaufnahmen direkt aufzunehmen oder bestehende Dateien hochzuladen und in wenigen Schritten in Textform umzuwandeln. Dabei steht die einfache Bedienung und klare visuelle Rückmeldung im Vordergrund.
 ## Inhaltsverzeichnis
-1. [Voraussetzungen](#voraussetzungen)
-2. [Installation](#installation)
-3. [Häufige Fehler](#häufige-fehler)
+1. [Projektbeschreibung](#projektbeschreibung)
+2. [Voraussetzungen](#voraussetzungen)
+3. [Installation](#installation)
+4. [Häufige Fehler](#häufige-fehler)
     - [Fehler bei der Installation von `openai-whisper`](#fehler-bei-der-installation-von-openai-whisper)
     - [Fehler: `ffmpeg` nicht gefunden](#fehler-ffmpeg-nicht-gefunden)
-4. [Kontakt](#kontakt)
+5. [Kontakt](#kontakt)
+
+## Projektbeschreibung
+Unser Projekt bietet eine benutzerfreundliche Lösung zur Audioverarbeitung mit automatischer Transkription und Zusammenfassung. Das System ermöglicht es, Audioaufnahmen direkt aufzunehmen oder bestehende Dateien hochzuladen und in wenigen Schritten in Textform umzuwandeln. Dabei steht die einfache Bedienung und klare visuelle Rückmeldung im Vordergrund.
 
 ## Voraussetzungen
 
