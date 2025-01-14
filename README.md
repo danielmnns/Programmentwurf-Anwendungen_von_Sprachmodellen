@@ -1,4 +1,7 @@
 # Systemsetup
+Projektbeschreibung
+
+Unser Projekt bietet eine benutzerfreundliche Lösung zur Audioverarbeitung mit automatischer Transkription und Zusammenfassung. Das System ermöglicht es, Audioaufnahmen direkt aufzunehmen oder bestehende Dateien hochzuladen und in wenigen Schritten in Textform umzuwandeln. Dabei steht die einfache Bedienung und klare visuelle Rückmeldung im Vordergrund.
 ## Inhaltsverzeichnis
 1. [Voraussetzungen](#voraussetzungen)
 2. [Installation](#installation)
