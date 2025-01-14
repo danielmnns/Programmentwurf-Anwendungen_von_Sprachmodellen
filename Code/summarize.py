@@ -15,11 +15,11 @@ def summarize_text(text):
     
     # Wir können die Benutzeranweisung anpassen, je nachdem, welche Sprache erkannt wird
     if language == 'de':
-        summary_instruction = 'Fasse die wichtigsten Punkte aus dem folgenden Text zusammen und liste alle To-Dos auf.'
+        summary_instruction = 'Fasse die wesentlichen Informationen aus dem folgenden Text prägnant zusammen und erstelle eine Liste aller To-Dos.'
     elif language == 'en':
-        summary_instruction = 'Summarize the main points of the following text and list all the to-dos.'
+        summary_instruction = 'Provide a concise summary of the key points in the following text and outline all the actionable to-dos.'
     else:
-        summary_instruction = 'Summarize the main points of the following text and list all the to-dos.'
+        summary_instruction = 'Summarize the key points of the following text and list all the to-dos. Please provide your response in English.'
 
     url = "http://127.0.0.1:11434/api/chat"  # Ollama API-Endpunkt
     payload = {
