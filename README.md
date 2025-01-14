@@ -1,15 +1,15 @@
 # KI-gestütztes Meeting-Protokoll-Tool
 
 ## Inhaltsverzeichnis
-1. [Projektbeschreibung](#projektbeschreibung)
-2. [Systemsetup](#systemsetup)  
-    2.1 [Voraussetzungen](#voraussetzungen)  
-    2.2 [Installation](#installation)  
-    2.3 [Häufige Fehler](#häufige-fehler)  
-        2.3.1 [Fehler bei der Installation von `openai-whisper`](#fehler-bei-der-installation-von-openai-whisper)  
-        2.3.2 [Fehler: `ffmpeg` nicht gefunden](#fehler-ffmpeg-nicht-gefunden)  
-3. [Präsentation]
-4. [Kontakt](#kontakt)
+1. [Projektbeschreibung](#1-projektbeschreibung)
+2. [Systemsetup](#2-systemsetup)  
+    2.1 [Voraussetzungen](#21-voraussetzungen))  
+    2.2 [Installation](#22-installation)  
+    2.3 [Häufige Fehler](#23-häufige-fehler)  
+        2.3.1 [Fehler bei der Installation von `openai-whisper`](#231-fehler-bei-der-installation-von-openai-whisper)  
+        2.3.2 [Fehler: `ffmpeg` nicht gefunden](#232-fehler-ffmpeg-nicht-gefunden)  
+3. [Präsentation](#3-präsentation)
+4. [Kontakt](#4-kontakt)
 
 
 ## 1. Projektbeschreibung
@@ -139,9 +139,9 @@ Nachdem torch aktualisiert und ffmpeg installiert sind, können Sie die Anwendun
 3. Wenn `ffmpeg` nicht gefunden wird, fügen Sie den Installationspfad von `ffmpeg` zu Ihrem PATH hinzu.
 
 ## 3. Präsentation
-Die Projektpräsentation finden Sie hier: `organisatorisches\Endpräsentation.pptx`
+Die Projektpräsentation mit Beispielnutzung finden Sie hier: `organisatorisches\Endpräsentation.pptx`
 
 ## 4. Kontakt
-Sollten Sie weiterhin Probleme mit der Anwendung haben, wenden Sie sich bitte per E-Mail an uns.
+Sollten Sie weiterhin Probleme mit der Anwendung oder Fragen haben, wenden Sie sich bitte per E-Mail an uns.
 
 ---
