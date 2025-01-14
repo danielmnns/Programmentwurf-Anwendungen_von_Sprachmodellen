@@ -23,19 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Datei-Upload-Button
-    const fileInput = document.getElementById('audio-file'); // Datei-Input
-    const uploadButton = document.getElementById('submit-upload'); // Upload-Button
+    const fileInput = document.getElementById('audio-file');
+    const uploadButton = document.getElementById('submit-upload');
 
     // Standardmäßig deaktivieren
     uploadButton.disabled = true;
 
     // Event-Listener für Datei-Auswahl
     fileInput.addEventListener('change', () => {
-        if (fileInput.files.length > 0) {
-            uploadButton.disabled = false; // Aktivieren, wenn eine Datei ausgewählt wurde
-        } else {
-            uploadButton.disabled = true; // Deaktivieren, wenn keine Datei ausgewählt ist
-        }
+        uploadButton.disabled = fileInput.files.length === 0;
     });
 
     // Record-Funktionalität
@@ -90,6 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('transcription').innerText = result.transcription;
             document.getElementById('summary').innerText = result.summary;
 
+            // Button-Status aktualisieren
+            updateDownloadButtonState();
         } catch (error) {
             hideLoading();
             console.error('Error during upload:', error);
@@ -120,15 +118,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function completeLoading() {
-        // Ladebalken schnell auf 100 % setzen und ausblenden
         document.getElementById('loading-bar').style.width = '100%';
         setTimeout(() => {
             hideLoading();
-        }, 500); // Kurze Verzögerung für den visuellen Abschluss
+        }, 500);
     }
 
     function hideLoading() {
         document.getElementById('loading').style.display = 'none';
-        document.getElementById('loading-bar').style.width = '0';
     }
+
+    function updateDownloadButtonState() {
+        const transcription = document.getElementById('transcription').innerText.trim();
+        const summary = document.getElementById('summary').innerText.trim();
+        const downloadButton = document.getElementById('download-pdf');
+
+        // Button aktivieren, wenn beide Inhalte verfügbar sind
+        downloadButton.disabled = !(transcription && summary);
+    }
+
+    document.getElementById('download-pdf').addEventListener('click', () => {
+        const transcription = document.getElementById('transcription').innerText.trim();
+        const summary = document.getElementById('summary').innerText.trim();
+
+        if (transcription && summary) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Konfiguration für die PDF-Ausgabe
+            const marginX = 20; // Rand links und rechts
+            const marginY = 20; // Rand oben
+            const lineSpacing = 10; // Abstand zwischen Fließtext und nächster Überschrift
+
+            // Erste Seite: Transcription
+            doc.setFont("Helvetica", "bold");
+            doc.setFontSize(16);
+            doc.text("Transcription", 105, marginY, { align: "center" });
+
+            // Fließtext: Transcription
+            doc.setFont("Helvetica", "normal");
+            doc.setFontSize(12);
+            let cursorY = marginY + 10;
+            doc.text(transcription, marginX, cursorY, { maxWidth: 170 });
+
+            // Abstand zwischen Fließtext und nächster Überschrift
+            cursorY += doc.getTextDimensions(transcription).h + lineSpacing;
+
+            // Neue Seite für die Zusammenfassung
+            doc.addPage();
+
+            // Zweite Seite: Summary
+            doc.setFont("Helvetica", "bold");
+            doc.setFontSize(16);
+            doc.text("Summary", 105, marginY, { align: "center" });
+
+            // Fließtext: Summary
+            doc.setFont("Helvetica", "normal");
+            doc.setFontSize(12);
+            cursorY = marginY + 10;
+            doc.text(summary, marginX, cursorY, { maxWidth: 170 });
+
+            // PDF speichern
+            doc.save("Transcription_and_Summary.pdf");
+        } else {
+            alert('Transcription or Summary is missing.');
+        }
+    });
 });

@@ -1,11 +1,3 @@
-<!--
-* @Author                : Daniel<danielmannes@gmail.com>
-* @CreatedDate           : 2025-01-10 18:29:00
-* @LastEditors           : Daniel<danielmannes@gmail.com>
-* @LastEditDate          : 2025-01-10 18:29:43
-* @FilePath              : Programmentwurf-Anwendungen_von_Sprachmodellen/Code/templates/index.html
-* @CopyRight             : MerBleueAviation
--->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +8,7 @@
     <title>Audio Transcription and Summary</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="/Code/static/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 
 <body>
@@ -62,6 +55,11 @@
         <div id="loading">
             <div id="loading-bar"></div>
             Loading...
+        </div>
+
+        
+        <div class="download-button">
+            <button id="download-pdf" onclick="downloadPDF()" disabled>Download as PDF</button>
         </div>
 
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
