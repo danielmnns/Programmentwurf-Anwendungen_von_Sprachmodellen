@@ -13,6 +13,8 @@
 
 ## Backend
 - **Transkription:** Implementierung einer Transkription.
+- **Integration** des KI-Tools Ollama.
+- **Unterstützung** für MP3- und WAV-Dateien.
 - **Zusammenfassung:** KI zur Erkennung und Markierung von wichtigen Themen, Aufgaben und Entscheidungen.
 
 ## Sonstiges
