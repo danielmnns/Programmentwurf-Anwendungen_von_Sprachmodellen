@@ -138,20 +138,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.getElementById('download-pdf').addEventListener('click', () => {
-        const transcription = document.getElementById('transcription').innerText;
-        const summary = document.getElementById('summary').innerText;
+        const transcription = document.getElementById('transcription').innerText.trim();
+        const summary = document.getElementById('summary').innerText.trim();
 
-        const doc = new jsPDF();
-        doc.setFontSize(16);
-        doc.text("Transcription", 10, 10);
-        doc.setFontSize(12);
-        doc.text(transcription, 10, 20);
+        if (transcription && summary) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
 
-        doc.setFontSize(16);
-        doc.text("Summary", 10, 40);
-        doc.setFontSize(12);
-        doc.text(summary, 10, 50);
+            doc.setFontSize(16);
+            doc.text("Transcription", 10, 10);
+            doc.setFontSize(12);
+            doc.text(transcription, 10, 20, { maxWidth: 180 });
 
-        doc.save("Transcription_and_Summary.pdf");
+            doc.setFontSize(16);
+            doc.text("Summary", 10, 40);
+            doc.setFontSize(12);
+            doc.text(summary, 10, 50, { maxWidth: 180 });
+
+            doc.save("Transcription_and_Summary.pdf");
+        } else {
+            alert('Transcription or Summary is missing.');
+        }
     });
-})
+});
