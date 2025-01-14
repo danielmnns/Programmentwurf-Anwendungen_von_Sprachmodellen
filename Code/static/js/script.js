@@ -129,6 +129,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function hideLoading() {
         document.getElementById('loading').style.display = 'none';
-        document.getElementById('loading-bar').style.width = '0';
     }
-});
+    
+    function updateDownloadButtonState() {
+        const transcription = document.getElementById('transcription').innerText.trim();
+        const summary = document.getElementById('summary').innerText.trim();
+        const downloadButton = document.getElementById('download-pdf');
+    
+        // Button aktivieren, wenn beide Inhalte verfügbar sind
+        if (transcription && summary) {
+            downloadButton.disabled = false;
+        } else {
+            downloadButton.disabled = true;
+        }
+    }
+    
+    function downloadPDF() {
+        const transcription = document.getElementById('transcription').innerText;
+        const summary = document.getElementById('summary').innerText;
+    
+        const doc = new jsPDF();
+        doc.setFontSize(16);
+        doc.text("Transcription", 10, 10);
+        doc.setFontSize(12);
+        doc.text(transcription, 10, 20);
+    
+        doc.setFontSize(16);
+        doc.text("Summary", 10, 40);
+        doc.setFontSize(12);
+        doc.text(summary, 10, 50);
+    
+        doc.save("Transcription_and_Summary.pdf");
+    } 
+})
