@@ -1,3 +1,13 @@
+'''
+@Author                : Daniel<danielmannes@gmail.com>
+@CreatedDate           : 2025-01-14 12:58:27
+@LastEditors           : Daniel<danielmannes@gmail.com>
+@LastEditDate          : 2025-01-14 12:58:27
+@FilePath              : Programmentwurf-Anwendungen_von_Sprachmodellen/Code/summarize.py
+@CopyRight             : MerBleueAviation
+'''
+
+
 import requests
 import json
 
@@ -6,7 +16,7 @@ def summarize_text(text):
     payload = {
         'model': 'llama3.2',
         'messages': [
-            {'role': 'system', 'content': 'Fasse die wichtigsten Punkte aus dem folgenden Text zusammen und liste alle To-Dos auf.'},
+            {'role': 'system', 'content': 'Fasse die wichtigsten Punkte aus dem folgenden Text zusammen und liste alle To-Dos auf. Gebe diese dann in der Sprache der Eingabe wider.'},
             {'role': 'user', 'content': text}
         ],
         'stream': True  # Aktiviert Streaming der Antwort
