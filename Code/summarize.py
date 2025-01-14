@@ -1,22 +1,32 @@
 '''
 @Author                : Daniel<danielmannes@gmail.com>
-@CreatedDate           : 2025-01-14 12:58:27
+@CreatedDate           : 2025-01-14 13:14:23
 @LastEditors           : Daniel<danielmannes@gmail.com>
-@LastEditDate          : 2025-01-14 12:58:27
+@LastEditDate          : 2025-01-14 13:14:23
 @FilePath              : Programmentwurf-Anwendungen_von_Sprachmodellen/Code/summarize.py
 @CopyRight             : MerBleueAviation
 '''
 
-
 import requests
 import json
+from langdetect import detect
 
 def summarize_text(text):
+    language = detect(text)  # Erkennung der Sprache des Textes
+    
+    # Wir können die Benutzeranweisung anpassen, je nachdem, welche Sprache erkannt wird
+    if language == 'de':
+        summary_instruction = 'Fasse die wichtigsten Punkte aus dem folgenden Text zusammen und liste alle To-Dos auf. Gib diese dann in der Sprache der Eingabe wider.'
+    elif language == 'en':
+        summary_instruction = 'Summarize the main points of the following text and list all the to-dos. Provide this summary in the language of the input.'
+    else:
+        summary_instruction = 'Summarize the main points of the following text and list all the to-dos. Provide this summary in the language of the input.'
+
     url = "http://127.0.0.1:11434/api/chat"  # Ollama API-Endpunkt
     payload = {
         'model': 'llama3.2',
         'messages': [
-            {'role': 'system', 'content': 'Fasse die wichtigsten Punkte aus dem folgenden Text zusammen und liste alle To-Dos auf. Gebe diese dann in der Sprache der Eingabe wider.'},
+            {'role': 'system', 'content': summary_instruction},
             {'role': 'user', 'content': text}
         ],
         'stream': True  # Aktiviert Streaming der Antwort
