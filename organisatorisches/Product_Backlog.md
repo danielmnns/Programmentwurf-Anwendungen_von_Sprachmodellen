@@ -6,9 +6,14 @@
 - Daniel
 
 ## Frontend
+- Upload/Record Seite
+- Styling
+- Datenschutzhinweise
+- PDF Download
 
 
 ## Backend
+
 
 
 ## Sonstiges
