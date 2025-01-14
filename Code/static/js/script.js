@@ -23,19 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Datei-Upload-Button
-    const fileInput = document.getElementById('audio-file'); // Datei-Input
-    const uploadButton = document.getElementById('submit-upload'); // Upload-Button
+    const fileInput = document.getElementById('audio-file');
+    const uploadButton = document.getElementById('submit-upload');
 
     // Standardmäßig deaktivieren
     uploadButton.disabled = true;
 
     // Event-Listener für Datei-Auswahl
     fileInput.addEventListener('change', () => {
-        if (fileInput.files.length > 0) {
-            uploadButton.disabled = false; // Aktivieren, wenn eine Datei ausgewählt wurde
-        } else {
-            uploadButton.disabled = true; // Deaktivieren, wenn keine Datei ausgewählt ist
-        }
+        uploadButton.disabled = fileInput.files.length === 0;
     });
 
     // Record-Funktionalität
@@ -90,6 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('transcription').innerText = result.transcription;
             document.getElementById('summary').innerText = result.summary;
 
+            // Button-Status aktualisieren
+            updateDownloadButtonState();
         } catch (error) {
             hideLoading();
             console.error('Error during upload:', error);
@@ -120,45 +118,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function completeLoading() {
-        // Ladebalken schnell auf 100 % setzen und ausblenden
         document.getElementById('loading-bar').style.width = '100%';
         setTimeout(() => {
             hideLoading();
-        }, 500); // Kurze Verzögerung für den visuellen Abschluss
+        }, 500);
     }
 
     function hideLoading() {
         document.getElementById('loading').style.display = 'none';
     }
-    
+
     function updateDownloadButtonState() {
         const transcription = document.getElementById('transcription').innerText.trim();
         const summary = document.getElementById('summary').innerText.trim();
         const downloadButton = document.getElementById('download-pdf');
-    
+
         // Button aktivieren, wenn beide Inhalte verfügbar sind
-        if (transcription && summary) {
-            downloadButton.disabled = false;
-        } else {
-            downloadButton.disabled = true;
-        }
+        downloadButton.disabled = !(transcription && summary);
     }
-    
-    function downloadPDF() {
+
+    document.getElementById('download-pdf').addEventListener('click', () => {
         const transcription = document.getElementById('transcription').innerText;
         const summary = document.getElementById('summary').innerText;
-    
+
         const doc = new jsPDF();
         doc.setFontSize(16);
         doc.text("Transcription", 10, 10);
         doc.setFontSize(12);
         doc.text(transcription, 10, 20);
-    
+
         doc.setFontSize(16);
         doc.text("Summary", 10, 40);
         doc.setFontSize(12);
         doc.text(summary, 10, 50);
-    
+
         doc.save("Transcription_and_Summary.pdf");
-    } 
+    });
 })
