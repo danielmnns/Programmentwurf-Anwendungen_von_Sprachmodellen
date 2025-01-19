@@ -105,7 +105,10 @@ ffmpeg -version
 Wenn ffmpeg korrekt eingerichtet ist, sehen Sie die Versionsinformationen.
 
 #### 2.2.7 Projekt ausführen
-Nachdem torch aktualisiert und ffmpeg installiert sind, können Sie die Anwendung ausführen
+Nachdem torch aktualisiert und ffmpeg installiert sind, können Sie die Anwendung ausführen. 
+```
+python pfad/zu/ihrer_datei.py
+```
 
 ### 2.3 Häufige Fehler
 #### 2.3.1 Fehler bei der Installation von `openai-whisper`
